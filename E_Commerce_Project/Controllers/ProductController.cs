@@ -17,6 +17,31 @@ namespace E_Commerce_Project.Controllers
             var model = db.ProductsList();
             return View(model);
         }
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+
+        // POST: ProductController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Product product)
+        {
+            try
+            {
+                int result = db.AddProduct(product);
+                if (result == 1)
+                    return RedirectToAction(nameof(Index));
+                else
+                    return View();
+
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         CartDAL cd = new CartDAL();
         //public IActionResult AddToCart()

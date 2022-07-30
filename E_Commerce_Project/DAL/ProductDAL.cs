@@ -36,6 +36,18 @@ namespace E_Commerce_Project.DAL
             con.Close();
             return plist;
         }
+        public int AddProduct(Product prod)
+        {
+            string qry = "insert into Product values(@name,@price)";
+            cmd = new SqlCommand(qry, con);
+
+            cmd.Parameters.AddWithValue("@name", prod.ProdName);
+            cmd.Parameters.AddWithValue("@price", prod.ProdPrice);
+            con.Open();
+            int result = cmd.ExecuteNonQuery();
+            con.Close();
+            return result;
+        }
 
         //internal int RemoveProduct(int id)
         //{
